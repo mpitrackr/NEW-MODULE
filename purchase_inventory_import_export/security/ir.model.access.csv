@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+acesss_file_process_log,Access File Process Job,model_file_process_log,,1,1,1,1
+access_file_transaction_log,Access File Transaction Log,model_file_transaction_log,,1,1,1,1
+access_file_server,Access SFTP Server,model_sftp_server,,1,1,1,1

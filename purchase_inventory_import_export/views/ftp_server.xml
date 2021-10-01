@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="sftp_server_list_view" model="ir.ui.view">
+		<field name="name">sftp.server.list</field>
+		<field name="model">sftp.server</field>
+		<field name="arch" type="xml">
+			<tree string="Sftp Server">
+				<field name="name"/>
+				<field name="sftp_host"/>
+				<field name="is_passive_mode"/>
+			</tree>
+		</field>
+	</record>
+
+	<record id="ftp_server_form_view" model="ir.ui.view">
+		<field name="name">sftp.server.form</field>
+		<field name="model">sftp.server</field>
+		<field name="arch" type="xml">
+			<form string="SFTP Server">
+				<header>
+                		<button name="test_server_connection" string="Test Connection" type="object" class="oe_highlight"/>
+                </header>
+				<sheet>
+					<group string="Information" name="server_info">
+						<group>
+							<field name="name"/>
+							<field name="sftp_host"/>
+							<field name="sftp_username"/>
+							<field name="sftp_password" password="1"/>
+							<field name="attachment_id"/>
+							<field name="server_file" filename="file_name"/>
+						</group>
+						<group>
+							<field name="sftp_port"/>
+							<field name="is_passive_mode"/>
+						</group>
+					</group>
+					<group string="Directory List" name="dir_list">
+						<group>
+							<field name="path_name"/>
+							<field name="path"/>
+						</group>
+						<group>
+							<field name="purchase_path"/>
+							<field name="archived_path"/>
+						</group>
+					</group>	
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_sftp_server" model="ir.actions.act_window">
+		<field name="name">SFTP Server Details</field>
+		<field name="res_model">sftp.server</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	 <menuitem id="menu_sftp_server_main" name="Server Info" 
+			   parent="menu_server_configuration" />
+	   
+	<menuitem 
+		id="menu_sftp_server" 
+		name="SFTP Server Details" 
+		parent="menu_sftp_server_main" 
+		action="action_sftp_server" 
+		sequence="20" />
+
+
+
+</odoo>	

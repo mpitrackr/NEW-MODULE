@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="file_process_log_list_view" model="ir.ui.view">
+	    <field name="name">file.process.list.view</field>
+	    <field name="model">file.process.log</field>
+		<field name="arch" type="xml">
+            <tree string="File Process Log" create='false'>	
+            	<field name="name"/>
+				<!-- <field name="operation_type"/> -->
+				<field name="filename"/>
+				<field name="message"/>
+				<field name="create_date"/>
+			</tree>
+		</field>
+	</record>
+	
+	<record id="file_process_log_form_view" model="ir.ui.view">
+		<field name="name">file.process.log.form</field>
+		<field name="model">file.process.log</field>
+		<field name="arch" type="xml">
+			<form string="File Process Log" create='false'>
+				<sheet>
+					<group string="General Info" name="general_info">
+						<group>
+							<field name="name" readonly="1"></field>
+							<field name="filename" readonly="1"/>
+						
+						</group>
+						<group>
+							<field name="create_date" readonly="1"/>
+							<field name="company_id" readonly="1"/>
+						</group>
+					</group>
+					<group string="Note" colspan="4" name="note">
+						<field name="message" readonly="1" nolabel="1"/>
+					</group>
+					<group string="Transactions" colspan="4">
+						<field name="transaction_log_ids" nolabel="1" readonly="1">
+							<tree string="Transaction Logs">
+								<field name="company_id" readonly="1"/>
+								<field name="skip_line"/>
+								<field name="row_number"/>
+								<field name="message"/>							
+							</tree>
+						</field>
+					</group>		
+					<div class="oe_chatter">
+	                   <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+	                   <field name="message_ids" widget="mail_thread"/>
+	              	</div>
+				</sheet>
+			</form>
+		</field>    
+	</record>
+	 
+	<record id="file_process_log_search_view" model="ir.ui.view">
+            <field name="name">file.process.log.search</field>
+            <field name="model">file.process.log</field>
+            <field name="arch" type="xml">
+                <search string="File Process Job">
+					<field name="name"/>
+					<field name="filename"/>		
+					<newline/>
+					<group expand="0" string="Group By...">
+						 <filter name ="create_date" string="Create Date" context="{'group_by':'create_date'}"/>
+					</group>  
+                </search>
+            </field>
+    	</record>
+    	        
+		<record id="action_file_process_log" model="ir.actions.act_window">
+	        <field name="name">File Process Log</field>
+			<field name="type">ir.actions.act_window</field> 
+			<field name="res_model">file.process.log</field>
+			<field name="view_mode">tree,form</field>	
+			<field name="view_id" ref="file_process_log_list_view"/>
+	        <field name="search_view_id" ref="file_process_log_search_view"/>
+    	</record>
+
+		<!-- Transaction Views -->
+		<record id="file_transaction_log_list_view" model="ir.ui.view">
+		    <field name="name">file.transaction.log.list.view</field>
+		    <field name="model">file.transaction.log</field>
+			<field name="arch" type="xml">
+	            <tree string="Transaction Log" create='false'>
+					<field name="message"/>				
+					<field name="create_date"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="file_transaction_log_form_view" model="ir.ui.view">
+			<field name="name">file.transaction.log.form.view</field>
+			<field name="model">file.transaction.log</field>
+			<field name="arch" type="xml">
+				<form string="Transaction" create='false'>
+					<sheet>
+						<group readonly="1">
+							<group string="File Info" name="file_info">
+								<field name="job_id" readonly="1"/>
+								<field name="file_name" readonly="1"/>
+								<field name="create_date" readonly="1"/>
+								<field name="skip_line" readonly="1"/>
+								<field name="row_number"/>
+							</group>
+							<group string="Message" name="group_msg">
+								<field name="message" readonly="1"/>
+							</group>
+						</group>
+						<group string="Remark" name="remark">
+							<field name="remark" placeholder="Remark..." nolabel="1"/>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record id="file_transaction_log_search_view" model="ir.ui.view">
+	            <field name="name">file.transaction.log.search</field>
+	            <field name="model">file.transaction.log</field>
+	            <field name="arch" type="xml">
+	                <search string="Transaction">
+						<field name="file_name"/>		
+						<newline/>
+			            <group expand="0" string="Group By...">
+							 <filter name="create_date" string="Create Date"   context="{'group_by':'create_date'}"/>
+						</group>  
+	                </search>
+	            </field>
+	    	</record> 
+	    	       
+		<record id="action_file_transaction_log" model="ir.actions.act_window">
+			<field name="name">Mismatch Details</field>
+			<field name="type">ir.actions.act_window</field>	
+			<field name="res_model">file.transaction.log</field>
+			<field name="view_mode">tree,form</field>
+			<!-- <field name="domain">['|',('is_mismatch_detail','=',True),'|',('skip_order','=',True),('skip_line','=',True),('application','!=','other'),('application','!=','stock'),('manually_processed','=',False)]</field> -->
+	        <field name="search_view_id" ref="file_transaction_log_search_view"/>
+		</record>
+	
+		<menuitem id="menu_server_configuration" name="Server Configuration" 
+			parent="purchase.menu_purchase_root" />
+				
+	    
+	    <menuitem id="menu_file_process_log_main" name="Process Log" 
+			parent="menu_server_configuration" />
+	    
+		<menuitem id="menu_file_process_log" name="File Process Log"
+	      parent="menu_file_process_log_main" sequence="10"
+		  action="action_file_process_log" groups="stock.group_stock_manager"/>
+			  
+		<!-- <menuitem id="menu_file_proces_log_transactions" 
+		  name="Mismatch Details"
+	      parent="menu_file_process_log_main" sequence="20"
+		  action="action_file_transaction_log"/>	   -->
+		  	    
+</odoo>	  
+
