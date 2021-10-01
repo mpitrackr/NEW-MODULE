@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="purchase_order_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="closed_code" readonly="1"/>
+                    <field name="closed_date" readonly="1"/>
+                    <field name="po_header_id" readonly="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                    <field name="po_header_id"/>
+                    <field name="po_line_id"/>
+                    <field name="oracle_po_line"/>
+                    <field name="oracle_po_ship_line"/>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree//field[@name='name']" position="after">
+                    <field name="po_header_id" invisible="1"/>
+                    <field name="po_line_id" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

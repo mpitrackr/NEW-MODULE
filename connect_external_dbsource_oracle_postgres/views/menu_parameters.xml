@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Main Menus -->
+    <menuitem id="sync_main_menu_root"
+            name="Syncronisation"
+            sequence="1"/>
+
+    <menuitem id="sychronize_menu"
+            name="Sychronisation"
+            parent="connect_external_dbsource_oracle_postgres.sync_main_menu_root"
+            action="connect_external_dbsource_oracle_postgres.sychronize_action"
+            sequence="5"/>
+
+    <menuitem id="sychronize_log_menu"
+            name="Sychronization Log"
+            parent="connect_external_dbsource_oracle_postgres.sync_main_menu_root"
+            action="connect_external_dbsource_oracle_postgres.sychronize_log_action"
+            sequence="6"/>
+            
+</odoo>

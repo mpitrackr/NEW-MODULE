@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="view_order_form_sale_barcode_inhe" model="ir.ui.view">
+            <field name="name">sale.order.form.sale.stock</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="oracle_order_status" />
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='sequence']" position="after">
+                    <field name="oracle_so_line" />
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+

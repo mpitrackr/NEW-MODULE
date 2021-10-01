@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sychronisation -->
+         <record id="view_sychronize_tree" model="ir.ui.view">
+            <field name="name">sychronize.sychronize.tree</field>
+            <field name="model">sychronize.sychronize</field>
+            <field name="arch" type="xml">
+                <tree string="Sychronisation">
+                    <field name="name"/>
+                    <field name="url"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sychronize_form" model="ir.ui.view">
+            <field name="name">sychronize.sychronize.form</field>
+            <field name="model">sychronize.sychronize</field>
+            <field name="arch" type="xml">
+                <form string="Sychronisation">
+                    <header>
+                        <button name="verify_connection" class="oe_highlight" string="Verifier Connection" type="object" states="draft"/>
+
+                        <!-- TEST -->
+                        <button name="static_query_execute" class="oe_highlight" string="Static Query" type="object" invisible="1"/>
+
+                        <button name="reset_connection" class="oe_highlight" string="Reset Connection" type="object" states="verified"/>
+                        <!-- attrs="{'invisible': ['|','|',('state','!=','verified'),('connection','!=','pg'),('options','!=','invoices')]}" -->
+                        <button name="sync_purchase_order" class="oe_highlight" string="Sync Purchase Order" type="object" attrs="{'invisible': ['|',('state','!=','verified'),('options','!=','purchase')]}" context="{'manual':True}"/>
+                        <button name="sync_sale_order" class="oe_highlight" string="Sync Sale Order" type="object" attrs="{'invisible': ['|',('state','!=','verified'),('options','!=','sale')]}" context="{'manual':True}"/>
+                        <button name="sync_ris_order" class="oe_highlight" string="Sync RIS Order" type="object" attrs="{'invisible': ['|',('state','!=','verified'),('options','!=','ris')]}" context="{'manual':True}"/>
+
+                        <button name="post_purchase_receipt_data" class="oe_highlight" string="Post Purchase Reciept" type="object" attrs="{'invisible': ['|',('state','!=','verified'),('options','!=','purchase')]}" context="{'manual':True}"/>
+                        <button name="post_sale_receipt_data" class="oe_highlight" string="Post Sale Reciept" type="object" attrs="{'invisible': ['|',('state','!=','verified'),('options','!=','sale')]}" context="{'manual':True}"/>
+
+                        <!-- Sync Vendor -->
+                        <button name="sync_vendor_rec" class="oe_highlight" string="Sync Vendor" type="object" attrs="{'invisible': ['|',('state','!=','verified'),('options','!=','purchase')]}" context="{'manual':True}"/>
+                        <button name="sync_customer_rec" class="oe_highlight" string="Sync Customer" type="object" attrs="{'invisible': ['|',('state','!=','verified'),('options','!=','sale')]}" context="{'manual':True}"/>
+                        
+                        <button name="temp_button_to_attribute15_none" class="oe_highlight" string="Sync POs Again" type="object" attrs="{'invisible': ['|',('state','!=','verified'),('options','!=','purchase')]}" invisible="1"/>
+
+                        <button name="sync_product_rec" class="oe_highlight" string="Sync Products" type="object" attrs="{'invisible': ['|',('state','!=','verified')]}" invisible="1"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,verified"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'readonly': [('state','=','verified')]}"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="url" attrs="{'readonly': [('state','=','verified')]}" placeholde="192.168.0.00"/>
+                                 <!-- attrs="{'readonly': [('state','=','verified')], 'invisible': [('connection','!=','pg')], 'required': [('connection','=','pg')]}" -->
+                                <field name="database" attrs="{'readonly': [('state','=','verified')]}"/>
+                            </group>
+                            <group>
+                                <field name="port" attrs="{'readonly': [('state','=','verified')]}"/>
+                                <field name="options" widget="radio" attrs="{'readonly': [('state','=','verified')]}"/>
+                                <field name="schedule" attrs="{'readonly': [('state','=','verified')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="username" attrs="{'readonly': [('state','=','verified')]}"/>
+                                <field name="password" password="True" attrs="{'readonly': [('state','=','verified')]}"/>
+                            </group>
+                            <group>
+                                <field name="connection" attrs="{'readonly': [('state','=','verified')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="sync_sale_tracker" invisible="1"/>
+                            <field name="sync_purchase_tracker" invisible="1"/>
+                            <field name="sync_ris_tracker" invisible="1"/>
+                            <field name="query"/>
+                            <field name="order_by"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+       <record id="sychronize_action" model="ir.actions.act_window">
+            <field name="name">Sychronisation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sychronize.sychronize</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new sychronisation record.
+                </p>
+            </field>
+        </record>
+   </data>
+</odoo>

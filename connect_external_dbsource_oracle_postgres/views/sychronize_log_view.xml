@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sychronisation -->
+         <record id="view_sychronize_log_tree" model="ir.ui.view">
+            <field name="name">sychronize.log.tree</field>
+            <field name="model">sychronize.log</field>
+            <field name="arch" type="xml">
+                <tree string="Sychronisation Log" create="false" default_order="id desc">
+                    <field name="sync_id"/>
+                    <field name="sync_log"/>
+                    <field name="sync_time"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sychronize_log_form" model="ir.ui.view">
+            <field name="name">sychronize.log.form</field>
+            <field name="model">sychronize.log</field>
+            <field name="arch" type="xml">
+                <form string="Sychronisation Log" create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="sync_id"/>
+                                <field name="sync_time"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <field name="sync_log"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+       <record id="sychronize_log_action" model="ir.actions.act_window">
+            <field name="name">Sychronisation Log</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sychronize.log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Log will create automatically when PO sync.
+                </p>
+            </field>
+        </record>
+   </data>
+</odoo>
