@@ -1,0 +1,46 @@
+<odoo>
+    <record id="inventory_form_view_inherited" model="ir.ui.view">
+        <field name="name">inventory.form.inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom']" position="after">
+                <field name='packing_size'/>
+                <field name="transaction_date"/>
+            </xpath>
+            <xpath expr="//field[@name='date_done']" position="attributes">
+                <attribute name="string">Transaction Date</attribute>
+            </xpath>
+            <xpath expr="//sheet/notebook/page[@name='note']" position="attributes">
+                <attribute name="string">Comments</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_order_form_sale_stock_inherite" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.view</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="barcode_scanner.view_order_form_sale_stock_inhee"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='oracle_so_line']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_stock_move_line_operations_tree_inherite" model="ir.ui.view">
+        <field name="name">stock.move.line.operations.tree.inherit</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_stock_move_line_detailed_operation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='package_id']" position="after">
+                <field name="comments"/>
+            </xpath>
+            <field name="oracle_so_line" position="attributes">
+            	<attribute name="invisible">1</attribute>
+           	</field> 	
+        </field>
+    </record>
+    
+
+</odoo>

@@ -1,0 +1,30 @@
+<odoo>
+    <record id="stock_move_line_product_selector_view_inherited" model="ir.ui.view">
+        <field name="name">stock.move.line.form.inherited</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="inventory_barcode.stock_move_line_product_selector" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/group/field[@name='description_picking']" position="attributes">
+                <attribute name='invisible'>1</attribute>
+            </xpath>
+
+            <field name="lot_name" position="replace"/>
+			<field name="lot_id" position="replace"/>
+		    <xpath expr="//form/group/field[@name='description_picking']" position="after">
+                <field name="transaction_date" required="1"/>
+            	<field name="comments" attrs="{'invisible':[('picking_code','=','outgoing')]}"/>
+                <field name="packing_size"/>
+                <field name="lot_name" groups="stock.group_production_lot" invisible="1"/>
+                <field name="lot_id" groups="stock.group_production_lot" context="{'default_product_id': product_id, 'default_company_id': company_id}" attrs="{'invisible': ['|', ('tracking', '=', 'none'), ('picking_type_use_existing_lots', '=', False)]}"/>
+            	<field name="lot_production_date"/>
+                <field name="lot_expiry_date" string ="Lot Expiry Date"/>
+            </xpath>
+            
+            <!-- Add by varun	-->
+            <field name="product_id" position="before">
+            	<field name="product_serial_number" invisible="context.get('show_serial_number',True)"/>
+        	</field>
+            
+        </field>
+    </record>
+</odoo>
