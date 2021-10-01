@@ -24,6 +24,7 @@ odoo.define('inventory_barcode.ClientAction', function(require) {
       show_information: '_onShowInformation',
       show_settings: '_onShowSettings',
       exit: '_onExit',
+      add_product_line: '_onAddProductLine',
       edit_line: '_onEditLine',
       add_line: '_onAddLine',
       next_page: '_onNextPage',
@@ -1546,9 +1547,10 @@ odoo.define('inventory_barcode.ClientAction', function(require) {
         var default_location_id = currentPage.location_id;
         var default_location_dest_id = currentPage.location_dest_id;
         var default_company_id = self.currentState.company_id[0];
+       
         return self._save().then(function() {
           if (self.actionParams.model === 'stock.picking') {
-            self.ViewsWidget = new ViewsWidget(
+        	  self.ViewsWidget = new ViewsWidget(
               self,
               'stock.move.line',
               'inventory_barcode.stock_move_line_product_selector', {
@@ -1557,6 +1559,61 @@ odoo.define('inventory_barcode.ClientAction', function(require) {
                 'default_location_id': default_location_id,
                 'default_location_dest_id': default_location_dest_id,
                 'default_qty_done': 1,
+              },
+              false
+
+            );
+          } else if (self.actionParams.model === 'stock.inventory') {
+            self.ViewsWidget = new ViewsWidget(
+              self,
+              'stock.inventory.line',
+              'inventory_barcode.stock_inventory_line_barcode', {
+                'default_company_id': default_company_id,
+                'default_inventory_id': self.currentState.id,
+                'default_location_id': default_location_id,
+                'default_product_qty': 1,
+              },
+              false
+            );
+          }
+          return self.ViewsWidget.appendTo(self.$('.o_content'));
+        });
+      });
+    },
+
+	/**
+     * Handles the `add_product` OdooEvent. It destroys `this.linesWidget` and displays an instance
+     * of `ViewsWidget` for the line model.
+     * `this.ViewsWidget`
+     *
+     * @private
+     * @param {OdooEvent} ev
+     */
+    _onAddProductLine: function(ev) {
+      ev.stopPropagation();
+      var self = this;
+      this.mutex.exec(function() {
+        self.linesWidgetState = self.linesWidget.getState();
+        self.linesWidget.destroy();
+        self.headerWidget.toggleDisplayContext('specialized');
+        // Get the default locations before calling save to not lose a newly created page.
+        var currentPage = self.pages[self.currentPageIndex];
+        var default_location_id = currentPage.location_id;
+        var default_location_dest_id = currentPage.location_dest_id;
+        var default_company_id = self.currentState.company_id[0];
+       
+        return self._save().then(function() {
+          if (self.actionParams.model === 'stock.picking') {
+        	  self.ViewsWidget = new ViewsWidget(
+              self,
+              'stock.move.line',
+              'inventory_barcode.stock_move_line_product_selector', {
+                'default_picking_id': self.currentState.id,
+                'default_company_id': default_company_id,
+                'default_location_id': default_location_id,
+                'default_location_dest_id': default_location_dest_id,
+                'default_qty_done': 1,
+				'show_serial_number': 0,
               },
               false
 
@@ -1604,7 +1661,6 @@ odoo.define('inventory_barcode.ClientAction', function(require) {
       this.mutex.exec(function() {
         return self._save().then(function() {
           var id = ev.data.id;
-
           if (virtual_id) {
             var currentPage = self.pages[self.currentPageIndex];
             var rec = _.find(currentPage.lines, function(line) {
@@ -1619,7 +1675,7 @@ odoo.define('inventory_barcode.ClientAction', function(require) {
               self,
               'stock.move.line',
               'inventory_barcode.stock_move_line_product_selector', {}, {
-                currentId: id
+                currentId: id,
               }
             );
 

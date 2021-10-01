@@ -98,6 +98,7 @@ var InventoryClientAction = ClientAction.extend({
     _makeNewLine: function (product, barcode, qty_done, package_id) {
         var virtualId = this._getNewVirtualId();
         var currentPage = this.pages[this.currentPageIndex];
+		alert("Hi...");
         var newLine = {
             'inventory_id': this.currentState.id,
             'product_id': {
