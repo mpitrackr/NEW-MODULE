@@ -104,9 +104,6 @@
                         </div>
                     </div>
                     <div t-if="state != 'done' and state != 'cancel'" class="o_barcode_line_actions d-flex align-items-center pl-4">
-                        <a class="o_add text-muted" href="#" title="Add Barcode Product"><i class="fa fa-plus"/></a>
-                    </div>
-                    <div t-if="state != 'done' and state != 'cancel'" class="o_barcode_line_actions d-flex align-items-center pl-4">
                         <a class="o_edit text-muted" href="#" title="Editsss"><i class="fa fa-pencil"/></a>
                     </div>
                     <div t-if="state != 'done' and state != 'cancel'" class="o_barcode_line_actions d-flex align-items-center pl-4">

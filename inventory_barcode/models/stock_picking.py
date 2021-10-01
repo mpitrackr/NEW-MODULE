@@ -3,7 +3,7 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 from odoo.tools.float_utils import float_compare, float_round
-from datetime import date
+
 import json
 
 
@@ -22,6 +22,7 @@ class StockMoveLine(models.Model):
         pass
 
   
+    
 
 class StockPicking(models.Model):
     _name = 'stock.picking'
@@ -367,14 +368,13 @@ class StockPicking(models.Model):
         lot_production_date =''
         lot_expire_date =''
         lot_id = ''
-        
         # barcode_list = barcode.split('|')
         # product_internal_reference = barcode_list[0]
         # packing_size = barcode_list[1]
         # lot_number = barcode_list[2]
         # lot_production_date =barcode_list[3]
         # lot_expire_date =barcode_list[4]
-#         barcode ="ABO1A|25kg/bag|Lot Test01272021-A|05-JAN-2021|05-JAN-2022"
+
         if barcode:
             barcode_list = barcode.split('|')
             product_internal_reference = barcode_list[0]
@@ -410,16 +410,14 @@ class StockPicking(models.Model):
                                     'lot_production_date':lot_production_date,
                                     'lot_id': lot_id and lot_id.id or False,
                                     'packing_size':packing_size,
-                                    'lot_name':lot_number,
-                                    'transaction_date':date.today(),
+                                    'lot_name':lot_number
                                     })
                 return True
         val = {'lot_expiry_date':lot_expire_date,
                 'lot_production_date':lot_production_date,
                 'lot_id':lot_id and [lot_id.id,lot_id.name] or False ,
                 'packing_size':packing_size,
-                'lot_name':lot_number,
-                'transaction_date':date.today(),}       
+                'lot_name':lot_number}       
         return val
 
 

@@ -62,7 +62,7 @@
         <field name="context">{
             'form_view_initial_mode': 'edit',
             'contact_display': 'partner_address',
-            'search_default_waiting': 1,
+            'search_default_available': 1,
             'force_detailed_view': True
         }</field>
     </record>

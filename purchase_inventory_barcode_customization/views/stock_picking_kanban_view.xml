@@ -1,0 +1,18 @@
+<odoo>
+    <record id="purchase_inventory_barcode_extends.picking_internal_searchview_inherited" model="ir.ui.view">
+        <field name="name">stock.picking.search.view.inherited</field>
+        <field name="model">stock.picking</field>
+        <field name="priority">50</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+        	<xpath expr="//search/field[@name='product_id']" position="replace"/>
+        		
+			<xpath expr="//search/field[@name='origin']" position="replace"/>
+			
+			<xpath expr="//field[@name='name']" position="before">
+				<field name="product_id"/>
+				<field name="origin"/>				
+			</xpath> 				
+        </field>
+    </record>
+</odoo>

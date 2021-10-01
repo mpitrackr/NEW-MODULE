@@ -610,10 +610,6 @@ tour.register('test_internal_picking_from_scratch_2', {test: true}, [
         },
     },
 
-	{
-        trigger: '.o_add',
-    },
-
     {
         trigger: '.o_edit',
     },
@@ -689,10 +685,6 @@ tour.register('test_internal_picking_from_scratch_2', {test: true}, [
     {
         trigger: '.o_barcode_client_action',
         run: 'scan product1'
-    },
-
-	{
-        trigger: '.o_add',
     },
 
     {
@@ -1907,10 +1899,6 @@ tour.register('test_bypass_source_scan', {test: true}, [
         run: 'scan serial1',
     },
 
-	{
-        trigger: '.o_add',
-    },
-
     {
         trigger: '.o_edit'
     },
@@ -2005,10 +1993,6 @@ tour.register('test_inventory_adjustment', {test: true}, [
     {
         trigger: '.o_barcode_client_action',
         run: 'scan product1',
-    },
-
-	{
-        trigger: '.o_add',
     },
 
     {
@@ -2597,10 +2581,6 @@ tour.register('test_reload_flow', {test: true}, [
     {
         trigger: '.o_barcode_client_action',
         run: 'scan product1'
-    },
-
-	{
-        trigger: '.o_add',
     },
 
     {

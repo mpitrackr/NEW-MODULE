@@ -86,7 +86,6 @@ var LinesWidget = Widget.extend({
         }));
         $body.prepend($line);
         
-		$line.on('click', '.o_add', this._onClickAddProductLine.bind(this));
         $line.on('click', '.o_edit', this._onClickEditLine.bind(this));
         $line.on('click', '.o_delete', this._onClickDeleteLine.bind(this));
         $line.on('click', '.o_package_content', this._onClickTruckLine.bind(this));
@@ -270,8 +269,7 @@ var LinesWidget = Widget.extend({
                 groups: this.groups,
             }));
             $body.prepend($lines);
-            $lines.on('click', '.o_add', this._onClickAddProductLine.bind(this));
-			$lines.on('click', '.o_edit', this._onClickEditLine.bind(this));
+            $lines.on('click', '.o_edit', this._onClickEditLine.bind(this));
             $lines.on('click', '.o_delete', this._onClickDeleteLine.bind(this));
             $lines.on('click', '.o_package_content', this._onClickTruckLine.bind(this));
         }
@@ -505,25 +503,12 @@ var LinesWidget = Widget.extend({
         this.trigger_up('add_line');
     },
 
-	/**
-     * Handles the click on the `add a product button`.
-     *
-     * @private
-     * @param {MouseEvent} ev
-     */
-     _onClickAddProductLine: function (ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-        this.trigger_up('add_product_line');
-    },
-
     /**
      * Handles the click on the `edit button` on a line.
      *
      * @private
      * @param {jQuery.Event} ev
      */
-
     _onClickEditLine: function (ev) {
         ev.preventDefault();
         ev.stopPropagation();
