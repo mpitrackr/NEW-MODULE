@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--Backend Registry -->
+        <template id="switch_language" name="switch language assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/sync_web_debranding/static/src/scss/app.scss"/>
+                <script type="text/javascript"
+                        src="/sync_web_debranding/static/src/js/app_window_title.js"/>
+                <script type="text/javascript"
+                        src="/sync_web_debranding/static/src/js/customize_user_menu.js"/>
+                <!-- <script type="text/javascript"
+                        src="/sync_web_debranding/static/src/js/title.js"/> -->
+                <script type="text/javascript"
+                        src="/sync_web_debranding/static/src/js/bot.js"/>
+                <script type="text/javascript"
+                        src="/sync_web_debranding/static/src/js/native_notifications.js"/>
+                <script type="text/javascript"
+                        src="/sync_web_debranding/static/src/js/field_upgrade.js"/>
+            </xpath>
+        </template>
+
+        <!--put teh company logo or the fav icons path here in href-->
+        <template id="web_layout_extend" inherit_id="web.layout">
+            <xpath expr="//title" position="replace">
+                <t t-set="ad_sync_app_system_name"
+                   t-value="request.env['ir.config_parameter'].sudo().get_param('sync_app_system_name')"/>
+                <title>
+                    <t t-esc="ad_sync_app_system_name or ''"/>
+                </title>
+            </xpath>
+            <xpath position="replace" expr="//link[@rel='shortcut icon']">
+                <link type="image/x-icon" rel="shortcut icon"
+                    t-att-href="'data:image/png;base64,%s' % to_text(request.env['ir.config_parameter'].sudo().get_param('sync_app_company_fevicon') or '')"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

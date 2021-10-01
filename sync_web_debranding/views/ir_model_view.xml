@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Modules -->
+    <record id="hide_author_website" model="ir.ui.view">
+        <field name="name">ir.module.module.form</field>
+        <field name="model">ir.module.module</field>
+        <field name="inherit_id" ref="base.module_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position='attributes'>
+                <attribute name="groups"></attribute>
+            </xpath>
+            <xpath expr="//field[@name='website']" position='after'>
+                <field name="hide_website_author" invisible="1"/>
+            </xpath>
+            <h3 class="oe_fade" position="attributes">
+                <attribute name="attrs">{'invisible': [('hide_website_author', '=', 'no')]}</attribute>
+            </h3>
+            <field name="website" position="attributes">
+                <attribute name="attrs">{'invisible': [('hide_website_author', '=', 'no')]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="hide_author_tree" model="ir.ui.view">
+        <field name="name">ir.module.module.tree</field>
+        <field name="model">ir.module.module</field>
+        <field name="inherit_id" ref="base.module_tree" />
+        <field name="arch" type="xml">
+            <field name="author" position="after">
+                <field name="hide_website_author" invisible="1"/>
+            </field>
+            <field name="author" position="attributes">
+                <attribute name="attrs">{'invisible': [('hide_website_author', '=', 'no')]}</attribute>
+            </field>
+            <field name="website" position="attributes">
+                <attribute name="attrs">{'invisible': [('hide_website_author', '=', 'no')]}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

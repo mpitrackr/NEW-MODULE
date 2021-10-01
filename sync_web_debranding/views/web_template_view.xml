@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="brand_promotion" inherit_id="web.brand_promotion_message" name="Brand Promotion">
+        <xpath expr="t[@t-raw]" position="replace">
+        </xpath>
+    </template>
+</odoo>

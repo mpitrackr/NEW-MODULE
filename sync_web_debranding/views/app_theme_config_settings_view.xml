@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Customize Setting View and menu-->
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">App Odoo Customize Settings</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='about']" position="replace">
+                </xpath>
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Debranding Settings" string="Debranding Settings" data-key="sync_web_debranding">
+                        <h2>Rebranding</h2>
+                        <div class="row mt16 o_settings_container" id="Rebranding">
+                           <div class="col-xs-12 col-md-6 o_setting_box" id="sync_app_company_fevicon">
+                                <div class="o_setting_right_pane">
+                                    <label for="sync_app_company_fevicon" string="Favicon"/>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <div id="sync_app_company_fevicon" class="oe_inline">
+                                                <field name="sync_app_company_fevicon"
+                                                   widget="image"
+                                                   class="oe_avatar"
+                                                   options="{'preview_image': 'image_small', 'size': [30, 30]}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-12 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <label class="o_form_label" for="sync_app_system_name"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <div class="o_required_modifier">
+                                                    <field name="sync_app_system_name"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <label class="o_form_label" for="sync_app_system_title"/>
+                                        <div class="text-muted">Apply in Warning messages and No Record Layout</div>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <div class="o_required_modifier">
+                                                    <field name="sync_app_system_title"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <label class="o_form_label" for="sync_app_system_url"/>
+                                        <div class="content-group">
+                                            <div class="mt16">
+                                                <div class="o_required_modifier">
+                                                    <field name="sync_app_system_url"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>User Menu</h2>
+                        <div class="row mt16 o_settings_container" id="user_menu">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="sync_app_show_debug"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="o_required_modifier">
+                                            <label for="sync_app_show_debug"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="sync_app_show_documentation"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="o_required_modifier">
+                                            <label for="sync_app_show_documentation"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="sync_app_show_documentation_dev"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="o_required_modifier">
+                                            <label for="sync_app_show_documentation_dev"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="sync_app_show_support"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="o_required_modifier">
+                                            <label for="sync_app_show_support"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="sync_app_show_account"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="o_required_modifier">
+                                            <label for="sync_app_show_account"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="sync_app_show_poweredby"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="o_required_modifier">
+                                            <label for="sync_app_show_poweredby"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>User Menu Content</h2>
+                        <div class="row mt16 o_settings_container" id="user_menu_content">
+                            <div class="col-xs-12 col-md-12 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <b>
+                                            <label class="o_form_label col-xs-4" for="sync_app_documentation_url"/>
+                                        </b>
+                                        <div class="o_required_modifier">
+                                            <field name="sync_app_documentation_url"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <b>
+                                            <label class="o_form_label col-xs-4" for="sync_app_documentation_dev_url"/>
+                                        </b>
+                                        <div class="o_required_modifier">
+                                            <field name="sync_app_documentation_dev_url"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <b>
+                                            <label class="o_form_label col-xs-4" for="sync_app_support_url"/>
+                                        </b>
+                                        <div class="o_required_modifier">
+                                            <field name="sync_app_support_url"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <b>
+                                            <label class="o_form_label col-xs-4" for="sync_app_account_title"/>
+                                        </b>
+                                        <div class="o_required_modifier">
+                                            <field name="sync_app_account_title"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <b>
+                                            <label class="o_form_label col-xs-4" for="sync_app_account_url"/>
+                                        </b>
+                                        <div class="o_required_modifier">
+                                            <field name="sync_app_account_url"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>Install App View</h2>
+                        <div class="row mt16 o_settings_container" id="install_app_view">
+                            <div class="col-xs-12 col-md-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="group_show_author_in_apps"/>
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <div class="content-group">
+                                        <div class="o_required_modifier">
+                                            <label for="group_show_author_in_apps"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sync_web_debranding_theme_config" model="ir.actions.act_window">
+            <field name="name">Debranding Customize</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'sync_web_debranding'}</field>
+        </record>
+
+        <menuitem
+            id="menu_app_group"
+            name="Debranding Customize"
+            parent="base.menu_administration"
+            sequence="1"
+            action="sync_web_debranding_theme_config"
+            groups="base.group_system"/>
+    </data>
+</odoo>

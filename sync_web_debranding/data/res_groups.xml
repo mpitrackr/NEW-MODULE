@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="group_show_author_in_apps" model="res.groups">
+        <field name="name">Show Author and Website in Apps Dashboard</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+</odoo>
